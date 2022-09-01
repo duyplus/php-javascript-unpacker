@@ -7,3 +7,5 @@ $unpacker = new JavascriptUnpacker;
 
 echo $unpacker->unpack($source);  // console.log('hello world');
 ```
+
+Packagist: https://packagist.org/packages/duyplus/php-javascript-unpacker
