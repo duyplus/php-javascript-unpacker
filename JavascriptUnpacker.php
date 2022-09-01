@@ -29,18 +29,14 @@ class JavaScriptUnpacker
         }
 
         $result = preg_replace_callback('#\b\w+\b#', array($this, 'lookup'), $payload);
-
         $result = strtr($result, array('\\' => ''));
-
         return $result;
     }
 
     public function isPacked($source, $dynamicHeader = true)
     {
         $header = $dynamicHeader ? '\w+,\w+,\w+,\w+,\w+,\w+' : 'p,a,c,k,e,[rd]';
-
         $source = strtr($source, array(' ' => ''));
-
         return (bool) preg_match('#^eval\(function\('.$header.'\){#i', trim($source));
     }
 
@@ -48,7 +44,6 @@ class JavaScriptUnpacker
     {
         $word = $match[0];
         $unbased = $this->map[$this->unbase($word, $this->base)];
-
         return $unbased ? $unbased : $word;
     }
 
@@ -71,7 +66,6 @@ class JavaScriptUnpacker
             $cipher = $array[$i];
             $result += pow($base, $i) * $dict[$selector][$cipher];
         }
-
         return $result;
     }
 
@@ -86,7 +80,6 @@ class JavaScriptUnpacker
         if ($base > 52) {
             return 54;
         }
-
         return 52;
     }
 }
